@@ -166,7 +166,7 @@ float g_dIdent3x3[] = {
     0.0, 1.0, 0.0,
     0.0, 0.0, 1.0};
 
-#ifdef MISSING_EGL_EXTERNAL_IMAGE
+#ifdef MISSING_CAM_EXTERNAL_IMAGE
 const int GL_TEXTURE_EXTERNAL_OES_ENUM = 0x0DE1;
 #else
 const int GL_TEXTURE_EXTERNAL_OES_ENUM = 0x8D65;
