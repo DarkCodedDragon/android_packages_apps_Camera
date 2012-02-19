@@ -1776,6 +1776,7 @@ public class Camera extends ActivityBase implements FocusManager.Listener,
                 // was already started. That means preview display was set to null
                 // and we need to set it now.
                 startPreview();
+                startFaceDetection();
             }
         }
 
