@@ -10,7 +10,10 @@ LOCAL_C_INCLUDES := \
         $(LOCAL_PATH)/feature_mos/src/mosaic
 
 LOCAL_CFLAGS := -O3 -DNDEBUG
-LOCAL_CFLAGS += -DCPU_COLOR_CONVERT
+
+ifeq ($(TARGET_CAMERA_COLOR_CONVERT),true)
+        LOCAL_CFLAGS += -DCPU_COLOR_CONVERT
+endif
 
 LOCAL_SRC_FILES := \
         feature_mos_jni.cpp \
@@ -42,7 +45,7 @@ LOCAL_SRC_FILES := \
         feature_stab/src/dbreg/vp_motionmodel.c
 
 LOCAL_SHARED_LIBRARIES := liblog libnativehelper libGLESv2
-#LOCAL_LDLIBS := -L$(SYSROOT)/usr/lib -ldl -llog -lGLESv2 -L$(TARGET_OUT)
+# LOCAL_LDLIBS := -L$(SYSROOT)/usr/lib -ldl -llog -lGLESv2 -L$(TARGET_OUT)
 
 LOCAL_MODULE_TAGS := optional
 
