@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2007 The Android Open Source Project
+ * Copyright (C) 2011 Twisted Playground
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +20,7 @@ package com.android.camera;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import android.os.SystemProperties;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -103,6 +105,9 @@ public class Camera extends ActivityBase implements FocusManager.Listener,
     private static final int UPDATE_PARAM_ZOOM = 2;
     private static final int UPDATE_PARAM_PREFERENCE = 4;
     private static final int UPDATE_PARAM_ALL = -1;
+
+    static final String PREVIEW_PROPERTY = "ro.camera.preview";
+
 
     // When setCameraParametersWhenIdle() is called, we accumulate the subsets
     // needed to be updated in mUpdateSet.
@@ -1785,8 +1790,12 @@ public class Camera extends ActivityBase implements FocusManager.Listener,
                 // Set preview display if the surface is being created and preview
                 // was already started. That means preview display was set to null
                 // and we need to set it now.
-                startPreview();
-                startFaceDetection();
+                boolean mPreviewOverride = SystemProperties.get(PREVIEW_PROPERTY).equalsIgnoreCase("true");
+                if (mPreviewOverride) {
+                    startPreview();
+                } else {
+                    setPreviewDisplay(holder);
+                }
             }
         }
 
