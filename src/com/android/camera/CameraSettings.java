@@ -41,26 +41,66 @@ public class CameraSettings {
     public static final String KEY_VIDEO_QUALITY = "pref_video_quality_key";
     public static final String KEY_VIDEO_TIME_LAPSE_FRAME_INTERVAL = "pref_video_time_lapse_frame_interval_key";
     public static final String KEY_PICTURE_SIZE = "pref_camera_picturesize_key";
+    public static final String KEY_VIDEO_SNAPSHOT_SIZE = "pref_camera_videosnapsize_key";
     public static final String KEY_JPEG_QUALITY = "pref_camera_jpegquality_key";
     public static final String KEY_FOCUS_MODE = "pref_camera_focusmode_key";
     public static final String KEY_FLASH_MODE = "pref_camera_flashmode_key";
     public static final String KEY_VIDEOCAMERA_FLASH_MODE = "pref_camera_video_flashmode_key";
+    public static final String KEY_COLOR_EFFECT = "pref_camera_coloreffect_key";
+    public static final String KEY_TOUCH_AF_AEC = "pref_camera_touchafaec_key";
     public static final String KEY_WHITE_BALANCE = "pref_camera_whitebalance_key";
     public static final String KEY_SCENE_MODE = "pref_camera_scenemode_key";
+    public static final String KEY_SCENE_DETECT = "pref_camera_scenedetect_key";
     public static final String KEY_EXPOSURE = "pref_camera_exposure_key";
     public static final String KEY_VIDEO_EFFECT = "pref_video_effect_key";
     public static final String KEY_CAMERA_ID = "pref_camera_id_key";
+    public static final String KEY_POWER_SHUTTER = "pref_power_shutter";
+    public static final String KEY_CAMERA_MODE = "pref_camera_mode_key";
+    public static final String KEY_SNAPSHOT_MODE = "pref_snapshot_mode_key";
+    public static final String KEY_ISO = "pref_camera_iso_key";
+    public static final String KEY_LENSSHADING = "pref_camera_lensshading_key";
+    public static final String KEY_MEMORY_COLOR_ENHANCEMENT = "pref_camera_mce_key";
+    public static final String KEY_HISTOGRAM = "pref_camera_histogram_key";
+    public static final String KEY_SKIN_TONE_ENHANCEMENT = "pref_camera_skinToneEnhancement_key";
+    public static final String KEY_SKIN_TONE_ENHANCEMENT_FACTOR = "pref_camera_skinToneEnhancement_factor_key";
+    public static final String KEY_AUTOEXPOSURE = "pref_camera_autoexposure_key";
+    public static final String KEY_ANTIBANDING = "pref_camera_antibanding_key";
+    public static final String KEY_PICTURE_FORMAT = "pref_camera_pictureformat_key";
+    public static final String KEY_SHARPNESS = "pref_camera_sharpness_key";
+    public static final String KEY_CONTRAST = "pref_camera_contrast_key";
+    public static final String KEY_SATURATION = "pref_camera_saturation_key";
+    public static final String KEY_SELECTABLE_ZONE_AF = "pref_camera_selectablezoneaf_key";
+    public static final String KEY_FACE_DETECTION = "pref_camera_facedetection_key";
+    public static final String KEY_REDEYE_REDUCTION = "pref_camera_redeyereduction_key";
+
+    public static final String KEY_CONTINUOUS_AF = "pref_camera_continuousaf_key";
+    public static final String KEY_VIDEO_HIGH_FRAME_RATE = "pref_camera_hfr_key";
+    public static final String KEY_DENOISE = "pref_camera_denoise_key";
+    public static final String KEY_AE_BRACKET_HDR = "pref_camera_ae_bracket_hdr_key";
+
+    private static final String VIDEO_QUALITY_HIGH = "high";
+    private static final String VIDEO_QUALITY_MMS = "mms";
+    private static final String VIDEO_QUALITY_YOUTUBE = "youtube";
+    public static final String KEY_TAP_TO_FOCUS_PROMPT_SHOWN = "pref_tap_to_focus_prompt_shown_key";
     public static final String KEY_CAMERA_FIRST_USE_HINT_SHOWN = "pref_camera_first_use_hint_shown_key";
     public static final String KEY_VIDEO_FIRST_USE_HINT_SHOWN = "pref_video_first_use_hint_shown_key";
-    public static final String KEY_POWER_SHUTTER = "pref_power_shutter";
 
     public static final String EXPOSURE_DEFAULT_VALUE = "0";
 
     public static final int CURRENT_VERSION = 5;
     public static final int CURRENT_LOCAL_VERSION = 2;
 
+    private static final int MMS_VIDEO_DURATION = (CamcorderProfile.get(CamcorderProfile.QUALITY_LOW) != null) ?
+                                                     CamcorderProfile.get(CamcorderProfile.QUALITY_LOW).duration :
+                                                     30;
+    private static final int YOUTUBE_VIDEO_DURATION = 15 * 60; // 15 mins
     public static final int DEFAULT_VIDEO_DURATION = 0; // no limit
 
+    public static final String DEFAULT_VIDEO_QUALITY_VALUE = "custom";
+    public static final String KEY_VIDEO_ENCODER = "pref_camera_videoencoder_key";
+    public static final String KEY_AUDIO_ENCODER = "pref_camera_audioencoder_key";
+    public static final String KEY_VIDEO_DURATION = "pref_camera_video_duration_key";
+    public static final String KEY_ZSL = "pref_camera_zsl_key";
     private static final String TAG = "CameraSettings";
     public static final String VALUE_ON = "on";
     public static final String VALUE_OFF = "off";
@@ -146,6 +186,8 @@ public class CameraSettings {
         ListPreference timeLapseInterval = group.findPreference(KEY_VIDEO_TIME_LAPSE_FRAME_INTERVAL);
         ListPreference pictureSize = group.findPreference(KEY_PICTURE_SIZE);
         ListPreference whiteBalance =  group.findPreference(KEY_WHITE_BALANCE);
+        ListPreference colorEffect = group.findPreference(KEY_COLOR_EFFECT);
+        ListPreference touchAfAec = group.findPreference(KEY_TOUCH_AF_AEC);
         ListPreference sceneMode = group.findPreference(KEY_SCENE_MODE);
         ListPreference flashMode = group.findPreference(KEY_FLASH_MODE);
         ListPreference focusMode = group.findPreference(KEY_FOCUS_MODE);
@@ -154,13 +196,31 @@ public class CameraSettings {
                 (IconListPreference) group.findPreference(KEY_CAMERA_ID);
         ListPreference videoFlashMode =
                 group.findPreference(KEY_VIDEOCAMERA_FLASH_MODE);
+        ListPreference mIso = group.findPreference(KEY_ISO);
+        ListPreference lensShade = group.findPreference(KEY_LENSSHADING);
+        ListPreference mce = group.findPreference(KEY_MEMORY_COLOR_ENHANCEMENT);
+        ListPreference histogram = group.findPreference(KEY_HISTOGRAM);
+        ListPreference skinToneEnhancement = group.findPreference(KEY_SKIN_TONE_ENHANCEMENT);
+        ListPreference antiBanding = group.findPreference(KEY_ANTIBANDING);
+        ListPreference autoExposure = group.findPreference(KEY_AUTOEXPOSURE);
+        ListPreference continuousAf = group.findPreference(KEY_CONTINUOUS_AF);
+        ListPreference selectableZoneAf = group.findPreference(KEY_SELECTABLE_ZONE_AF);
+        ListPreference faceDetection = group.findPreference(KEY_FACE_DETECTION);
+        ListPreference hfr = group.findPreference(KEY_VIDEO_HIGH_FRAME_RATE);
+        ListPreference redeyeReduction = group.findPreference(KEY_REDEYE_REDUCTION);
+        ListPreference denoise = group.findPreference(KEY_DENOISE);
+
+        ListPreference hdr = group.findPreference(KEY_AE_BRACKET_HDR);
         ListPreference videoEffect = group.findPreference(KEY_VIDEO_EFFECT);
+        ListPreference zsl = group.findPreference(KEY_ZSL);
+        ListPreference videoSnapSize = group.findPreference(KEY_VIDEO_SNAPSHOT_SIZE);
 
         // Since the screen could be loaded from different resources, we need
         // to check if the preference is available here
         if (videoQuality != null) {
             filterUnsupportedOptions(group, videoQuality, getSupportedVideoQuality());
         }
+
 
         if (pictureSize != null) {
             filterUnsupportedOptions(group, pictureSize, sizeListToStringList(
@@ -170,10 +230,18 @@ public class CameraSettings {
             filterUnsupportedOptions(group,
                     whiteBalance, mParameters.getSupportedWhiteBalance());
         }
+        if (colorEffect != null) {
+            filterUnsupportedOptions(group,
+                    colorEffect, mParameters.getSupportedColorEffects());
+        }
         if (sceneMode != null) {
             filterUnsupportedOptions(group,
                     sceneMode, mParameters.getSupportedSceneModes());
         }
+        /*if (sceneDetect != null) {
+            filterUnsupportedOptions(group,
+                    sceneDetect, mParameters.getSupportedSceneDetectModes());
+        }*/
         if (flashMode != null) {
             filterUnsupportedOptions(group,
                     flashMode, mParameters.getSupportedFlashModes());
@@ -184,7 +252,7 @@ public class CameraSettings {
                         focusMode, mParameters.getSupportedFocusModes());
             } else {
                 // Remove the focus mode if we can use tap-to-focus.
-                removePreference(group, focusMode.getKey());
+                //removePreference(group, focusMode.getKey()); //punits
             }
         }
         if (videoFlashMode != null) {
@@ -193,11 +261,87 @@ public class CameraSettings {
         }
         if (exposure != null) buildExposureCompensation(group, exposure);
         if (cameraIdPref != null) buildCameraId(group, cameraIdPref);
+        /*if (mIso != null) {
+            filterUnsupportedOptions(group,
+                    mIso, mParameters.getSupportedIsoValues());
+        }*/
+        /*if (lensShade!= null) {
+            filterUnsupportedOptions(group,
+                    lensShade, mParameters.getSupportedLensShadeModes());
+        }*/
+        /*if (mce!= null) {
+            filterUnsupportedOptions(group,
+                    mce, mParameters.getSupportedMemColorEnhanceModes());
+        }*/
+        /*if (hdr!= null) {
+            filterUnsupportedOptions(group,
+                    hdr, mParameters.getSupportedHighDynamicRangeImagingModes());
+        }*/
+        if (histogram!= null) {
+            filterUnsupportedOptions(group,
+                    histogram, mParameters.getSupportedHistogramModes());
+        }
+        if (skinToneEnhancement!= null) {
+            filterUnsupportedOptions(group,
+                    skinToneEnhancement, mParameters.getSupportedSkinToneEnhancementModes());
+        }
+        /*if (antiBanding != null) {
+            filterUnsupportedOptions(group,
+                     antiBanding, mParameters.getSupportedAntibanding());
+        }*/
+        /*if (autoExposure != null) {
+            filterUnsupportedOptions(group,
+                     autoExposure, mParameters.getSupportedAutoexposure());
+        }*/
+        /*if(continuousAf != null){
+            if((mParameters.getSupportedFocusModes() == null) ||
+                    (mParameters.getSupportedFocusModes().indexOf(
+                        Parameters.FOCUS_MODE_CONTINUOUS_VIDEO)<0)){
+                removePreference(group, continuousAf.getKey());
+            }
+        }*/
+        /*if (touchAfAec != null) {
+            filterUnsupportedOptions(group,
+                    touchAfAec, mParameters.getSupportedTouchAfAec());
+        }*/
+        if (selectableZoneAf != null) {
+            filterUnsupportedOptions(group,
+                    selectableZoneAf, mParameters.getSupportedSelectableZoneAf());
+        }
+        /*if (faceDetection != null) {
+            filterUnsupportedOptions(group,
+                    faceDetection, mParameters.getSupportedFaceDetectionModes());
+        }*/
+        /*if (hfr != null) {
+            filterUnsupportedOptions(group,
+                    hfr, mParameters.getSupportedVideoHighFrameRateModes());
+        }*/
+        if (redeyeReduction != null) {
+            filterUnsupportedOptions(group,
+                    redeyeReduction, mParameters.getSupportedRedeyeReductionModes());
+        }
+        if (denoise != null) {
+            filterUnsupportedOptions(group,
+            denoise, mParameters.getSupportedDenoiseModes());
+        }
 
         if (timeLapseInterval != null) resetIfInvalid(timeLapseInterval);
         if (videoEffect != null) {
             initVideoEffect(group, videoEffect);
             resetIfInvalid(videoEffect);
+        }
+        if (hfr != null) {
+            filterUnsupportedOptions(group,
+                    hfr, mParameters.getSupportedVideoHighFrameRateModes());
+        }
+
+        if (!mParameters.isFullsizeVideoSnapSupported())
+        {
+             filterUnsupportedOptions(group,
+                    videoSnapSize, null);
+        }else{
+            filterUnsupportedOptions(group, videoSnapSize, sizeListToStringList(
+                    mParameters.getSupportedPictureSizes()));
         }
     }
 
@@ -365,6 +509,25 @@ public class CameraSettings {
         editor.apply();
     }
 
+	 public static void upgradeAllPreferences(ComboPreferences pref) {
+        upgradeGlobalPreferences(pref.getGlobal());
+        upgradeLocalPreferences(pref.getLocal());
+    }
+
+    public static boolean getVideoQuality(String quality) {
+        return VIDEO_QUALITY_YOUTUBE.equals(
+                quality) || VIDEO_QUALITY_HIGH.equals(quality);
+    }
+
+    public static int getVidoeDurationInMillis(String quality) {
+        if (VIDEO_QUALITY_MMS.equals(quality)) {
+            return MMS_VIDEO_DURATION * 1000;
+        } else if (VIDEO_QUALITY_YOUTUBE.equals(quality)) {
+            return YOUTUBE_VIDEO_DURATION * 1000;
+        }
+        return DEFAULT_VIDEO_DURATION * 1000;
+    }
+
     public static int readPreferredCameraId(SharedPreferences pref) {
         return Integer.parseInt(pref.getString(KEY_CAMERA_ID, "0"));
     }
@@ -468,28 +631,79 @@ public class CameraSettings {
         writePreferredCameraId(preferences, currentCameraId);
     }
 
+    //private int checkSupportedVideoQuality(List <Size> supported)
+    private boolean checkSupportedVideoQuality(int width, int height){
+        List <Size> supported = mParameters.getSupportedPreviewSizes();
+        int flag = 0;
+        for (Size size : supported){
+    //since we are having two profiles with same height, we are checking with height
+            if (size.height == 480) {
+                if (size.height == height && size.width == width) {
+                    flag = 1;
+                    break;
+                }
+            } else {
+                if (size.width == width) {
+                    flag = 1;
+                    break;
+                }
+            }
+        }
+        if (flag == 1)
+            return true;
+
+        return false;
+        }
+
     private ArrayList<String> getSupportedVideoQuality() {
         ArrayList<String> supported = new ArrayList<String>();
         // Check for supported quality
         if (CamcorderProfile.hasProfile(mCameraId, CamcorderProfile.QUALITY_1080P)) {
-            supported.add(Integer.toString(CamcorderProfile.QUALITY_1080P));
+            if (checkSupportedVideoQuality(1920,1088)){
+                supported.add(Integer.toString(CamcorderProfile.QUALITY_1080P));
+            }
         }
         if (CamcorderProfile.hasProfile(mCameraId, CamcorderProfile.QUALITY_720P)) {
-            supported.add(Integer.toString(CamcorderProfile.QUALITY_720P));
+            if (checkSupportedVideoQuality(1280,720)){
+                supported.add(Integer.toString(CamcorderProfile.QUALITY_720P));
+            }
         }
         if (CamcorderProfile.hasProfile(mCameraId, CamcorderProfile.QUALITY_480P)) {
-            supported.add(Integer.toString(CamcorderProfile.QUALITY_480P));
-        }
-        if (CamcorderProfile.hasProfile(mCameraId, CamcorderProfile.QUALITY_CIF)) {
-            supported.add(Integer.toString(CamcorderProfile.QUALITY_CIF));
-        }
-        if (CamcorderProfile.hasProfile(mCameraId, CamcorderProfile.QUALITY_QVGA)) {
-            supported.add(Integer.toString(CamcorderProfile.QUALITY_QVGA));
+            if (checkSupportedVideoQuality(720,480)){
+                supported.add(Integer.toString(CamcorderProfile.QUALITY_480P));
+            }
         }
         if (CamcorderProfile.hasProfile(mCameraId, CamcorderProfile.QUALITY_QCIF)) {
-            supported.add(Integer.toString(CamcorderProfile.QUALITY_QCIF));
+            if (checkSupportedVideoQuality(176,144)){
+                supported.add(Integer.toString(CamcorderProfile.QUALITY_QCIF));
+            }
         }
-
+        if (CamcorderProfile.hasProfile(mCameraId, CamcorderProfile.QUALITY_CIF)) {
+            if (checkSupportedVideoQuality(352,288)){
+                supported.add(Integer.toString(CamcorderProfile.QUALITY_CIF));
+            }
+        }
+        if (CamcorderProfile.hasProfile(mCameraId, CamcorderProfile.QUALITY_FWVGA)) {
+            supported.add(Integer.toString(CamcorderProfile.QUALITY_FWVGA));
+        }
+        if (CamcorderProfile.hasProfile(mCameraId, CamcorderProfile.QUALITY_WVGA)) {
+            if (checkSupportedVideoQuality(800,480)){
+                supported.add(Integer.toString(CamcorderProfile.QUALITY_WVGA));
+            }
+        }
+        if (CamcorderProfile.hasProfile(mCameraId, CamcorderProfile.QUALITY_VGA)) {
+            if (checkSupportedVideoQuality(640,480)){
+                supported.add(Integer.toString(CamcorderProfile.QUALITY_VGA));
+            }
+        }
+        if (CamcorderProfile.hasProfile(mCameraId, CamcorderProfile.QUALITY_WQVGA)) {
+            supported.add(Integer.toString(CamcorderProfile.QUALITY_WQVGA));
+        }
+        if (CamcorderProfile.hasProfile(mCameraId, CamcorderProfile.QUALITY_QVGA)) {
+            if (checkSupportedVideoQuality(320,240)){
+                supported.add(Integer.toString(CamcorderProfile.QUALITY_QVGA));
+            }
+        }
         return supported;
     }
 
@@ -525,5 +739,26 @@ public class CameraSettings {
         }
 
         filterUnsupportedOptions(group, videoEffect, supported);
+    }
+
+	public static int readPreferredCameraMode(SharedPreferences pref) {
+        return Integer.parseInt(pref.getString(KEY_CAMERA_MODE, "1"));
+    }
+
+    public static void writePreferredCameraMode(SharedPreferences pref,
+            int cameraMode) {
+        Editor editor = pref.edit();
+        editor.putString(KEY_CAMERA_MODE, Integer.toString(cameraMode));
+        editor.apply();
+    }
+    public static int readPreferredSnapshotMode(SharedPreferences pref) {
+        return Integer.parseInt(pref.getString(KEY_SNAPSHOT_MODE, "4"));
+    }
+
+    public static void writePreferredSnapshotMode(SharedPreferences pref,
+            int snapshotMode) {
+        Editor editor = pref.edit();
+        editor.putString(KEY_SNAPSHOT_MODE, Integer.toString(snapshotMode));
+        editor.apply();
     }
 }

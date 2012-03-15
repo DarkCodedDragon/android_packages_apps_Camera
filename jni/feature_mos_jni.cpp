@@ -356,8 +356,9 @@ void ConvertYVUAiToPlanarYVU(unsigned char *planar, unsigned char *in, int width
     {
 #ifndef CPU_COLOR_CONVERT
         *Yptr++ = *in++;
-        *Vptr++ = *in++;
+        *Vptr++ = *in++ + 128; // Adjust for greenish tint
         *Uptr++ = *in++;
+        //*Uptr++ = *in++ + 90; // Adjust to force rotation
         in++;   // Alpha
 #else // CPU_COLOR_CONVERT
         int y, v, u;

@@ -190,6 +190,5 @@ const char* SurfaceTextureRenderer::FragmentShaderSource() const
         "void main() {\n"
         "  gl_FragColor = texture2D(sTexture, vTextureNormCoord);\n"
         "}\n";
-
     return gFragmentShader;
 }

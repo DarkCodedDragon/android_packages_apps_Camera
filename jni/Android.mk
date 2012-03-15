@@ -15,6 +15,10 @@ ifeq ($(TARGET_CAMERA_COLOR_CONVERT),true)
         LOCAL_CFLAGS += -DCPU_COLOR_CONVERT
 endif
 
+ifeq ($(TARGET_BOARD_PLATFORM),msm7x30)
+        LOCAL_CFLAGS += -DMISSING_EGL_EXTERNAL_IMAGE
+endif
+
 LOCAL_SRC_FILES := \
         feature_mos_jni.cpp \
         mosaic_renderer_jni.cpp \
