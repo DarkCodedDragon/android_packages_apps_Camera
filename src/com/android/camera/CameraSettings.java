@@ -50,7 +50,7 @@ public class CameraSettings {
     public static final String KEY_TOUCH_AF_AEC = "pref_camera_touchafaec_key";
     public static final String KEY_WHITE_BALANCE = "pref_camera_whitebalance_key";
     public static final String KEY_SCENE_MODE = "pref_camera_scenemode_key";
-    public static final String KEY_SCENE_DETECT = "pref_camera_scenedetect_key";
+    //public static final String KEY_SCENE_DETECT = "pref_camera_scenedetect_key";
     public static final String KEY_EXPOSURE = "pref_camera_exposure_key";
     public static final String KEY_VIDEO_EFFECT = "pref_video_effect_key";
     public static final String KEY_CAMERA_ID = "pref_camera_id_key";
@@ -76,7 +76,7 @@ public class CameraSettings {
     public static final String KEY_CONTINUOUS_AF = "pref_camera_continuousaf_key";
     public static final String KEY_VIDEO_HIGH_FRAME_RATE = "pref_camera_hfr_key";
     public static final String KEY_DENOISE = "pref_camera_denoise_key";
-    public static final String KEY_AE_BRACKET_HDR = "pref_camera_ae_bracket_hdr_key";
+    //public static final String KEY_AE_BRACKET_HDR = "pref_camera_ae_bracket_hdr_key";
 
     private static final String VIDEO_QUALITY_HIGH = "high";
     private static final String VIDEO_QUALITY_MMS = "mms";
@@ -210,7 +210,7 @@ public class CameraSettings {
         ListPreference redeyeReduction = group.findPreference(KEY_REDEYE_REDUCTION);
         ListPreference denoise = group.findPreference(KEY_DENOISE);
 
-        ListPreference hdr = group.findPreference(KEY_AE_BRACKET_HDR);
+        //ListPreference hdr = group.findPreference(KEY_AE_BRACKET_HDR);
         ListPreference videoEffect = group.findPreference(KEY_VIDEO_EFFECT);
         ListPreference zsl = group.findPreference(KEY_ZSL);
         ListPreference videoSnapSize = group.findPreference(KEY_VIDEO_SNAPSHOT_SIZE);
@@ -261,18 +261,18 @@ public class CameraSettings {
         }
         if (exposure != null) buildExposureCompensation(group, exposure);
         if (cameraIdPref != null) buildCameraId(group, cameraIdPref);
-        /*if (mIso != null) {
+        if (mIso != null) {
             filterUnsupportedOptions(group,
                     mIso, mParameters.getSupportedIsoValues());
-        }*/
-        /*if (lensShade!= null) {
+        }
+        if (lensShade!= null) {
             filterUnsupportedOptions(group,
                     lensShade, mParameters.getSupportedLensShadeModes());
-        }*/
-        /*if (mce!= null) {
+        }
+        if (mce!= null) {
             filterUnsupportedOptions(group,
                     mce, mParameters.getSupportedMemColorEnhanceModes());
-        }*/
+        }
         /*if (hdr!= null) {
             filterUnsupportedOptions(group,
                     hdr, mParameters.getSupportedHighDynamicRangeImagingModes());
@@ -285,37 +285,37 @@ public class CameraSettings {
             filterUnsupportedOptions(group,
                     skinToneEnhancement, mParameters.getSupportedSkinToneEnhancementModes());
         }
-        /*if (antiBanding != null) {
+        if (antiBanding != null) {
             filterUnsupportedOptions(group,
                      antiBanding, mParameters.getSupportedAntibanding());
-        }*/
-        /*if (autoExposure != null) {
+        }
+        if (autoExposure != null) {
             filterUnsupportedOptions(group,
                      autoExposure, mParameters.getSupportedAutoexposure());
-        }*/
-        /*if(continuousAf != null){
+        }
+        if(continuousAf != null){
             if((mParameters.getSupportedFocusModes() == null) ||
                     (mParameters.getSupportedFocusModes().indexOf(
                         Parameters.FOCUS_MODE_CONTINUOUS_VIDEO)<0)){
                 removePreference(group, continuousAf.getKey());
             }
-        }*/
-        /*if (touchAfAec != null) {
+        }
+        if (touchAfAec != null) {
             filterUnsupportedOptions(group,
                     touchAfAec, mParameters.getSupportedTouchAfAec());
-        }*/
+        }
         if (selectableZoneAf != null) {
             filterUnsupportedOptions(group,
                     selectableZoneAf, mParameters.getSupportedSelectableZoneAf());
         }
-        /*if (faceDetection != null) {
+        if (faceDetection != null) {
             filterUnsupportedOptions(group,
                     faceDetection, mParameters.getSupportedFaceDetectionModes());
-        }*/
-        /*if (hfr != null) {
+        }
+        if (hfr != null) {
             filterUnsupportedOptions(group,
                     hfr, mParameters.getSupportedVideoHighFrameRateModes());
-        }*/
+        }
         if (redeyeReduction != null) {
             filterUnsupportedOptions(group,
                     redeyeReduction, mParameters.getSupportedRedeyeReductionModes());
@@ -480,7 +480,7 @@ public class CameraSettings {
         }
         if (version == 1) {
             // Change jpeg quality {65,75,85} to {normal,fine,superfine}
-            String quality = pref.getString(KEY_JPEG_QUALITY, "85");
+            String quality = pref.getString(KEY_JPEG_QUALITY, "95");
             if (quality.equals("65")) {
                 quality = "normal";
             } else if (quality.equals("75")) {
@@ -659,50 +659,34 @@ public class CameraSettings {
         ArrayList<String> supported = new ArrayList<String>();
         // Check for supported quality
         if (CamcorderProfile.hasProfile(mCameraId, CamcorderProfile.QUALITY_1080P)) {
-            if (checkSupportedVideoQuality(1920,1088)){
-                supported.add(Integer.toString(CamcorderProfile.QUALITY_1080P));
-            }
+            supported.add(Integer.toString(CamcorderProfile.QUALITY_1080P));
         }
         if (CamcorderProfile.hasProfile(mCameraId, CamcorderProfile.QUALITY_720P)) {
-            if (checkSupportedVideoQuality(1280,720)){
-                supported.add(Integer.toString(CamcorderProfile.QUALITY_720P));
-            }
+            supported.add(Integer.toString(CamcorderProfile.QUALITY_720P));
         }
         if (CamcorderProfile.hasProfile(mCameraId, CamcorderProfile.QUALITY_480P)) {
-            if (checkSupportedVideoQuality(720,480)){
-                supported.add(Integer.toString(CamcorderProfile.QUALITY_480P));
-            }
-        }
-        if (CamcorderProfile.hasProfile(mCameraId, CamcorderProfile.QUALITY_QCIF)) {
-            if (checkSupportedVideoQuality(176,144)){
-                supported.add(Integer.toString(CamcorderProfile.QUALITY_QCIF));
-            }
-        }
-        if (CamcorderProfile.hasProfile(mCameraId, CamcorderProfile.QUALITY_CIF)) {
-            if (checkSupportedVideoQuality(352,288)){
-                supported.add(Integer.toString(CamcorderProfile.QUALITY_CIF));
-            }
+            supported.add(Integer.toString(CamcorderProfile.QUALITY_480P));
         }
         if (CamcorderProfile.hasProfile(mCameraId, CamcorderProfile.QUALITY_FWVGA)) {
             supported.add(Integer.toString(CamcorderProfile.QUALITY_FWVGA));
         }
         if (CamcorderProfile.hasProfile(mCameraId, CamcorderProfile.QUALITY_WVGA)) {
-            if (checkSupportedVideoQuality(800,480)){
-                supported.add(Integer.toString(CamcorderProfile.QUALITY_WVGA));
-            }
+            supported.add(Integer.toString(CamcorderProfile.QUALITY_WVGA));
         }
         if (CamcorderProfile.hasProfile(mCameraId, CamcorderProfile.QUALITY_VGA)) {
-            if (checkSupportedVideoQuality(640,480)){
-                supported.add(Integer.toString(CamcorderProfile.QUALITY_VGA));
-            }
+            supported.add(Integer.toString(CamcorderProfile.QUALITY_VGA));
         }
         if (CamcorderProfile.hasProfile(mCameraId, CamcorderProfile.QUALITY_WQVGA)) {
             supported.add(Integer.toString(CamcorderProfile.QUALITY_WQVGA));
         }
+        if (CamcorderProfile.hasProfile(mCameraId, CamcorderProfile.QUALITY_CIF)) {
+            supported.add(Integer.toString(CamcorderProfile.QUALITY_CIF));
+        }
         if (CamcorderProfile.hasProfile(mCameraId, CamcorderProfile.QUALITY_QVGA)) {
-            if (checkSupportedVideoQuality(320,240)){
-                supported.add(Integer.toString(CamcorderProfile.QUALITY_QVGA));
-            }
+            supported.add(Integer.toString(CamcorderProfile.QUALITY_QVGA));
+        }
+        if (CamcorderProfile.hasProfile(mCameraId, CamcorderProfile.QUALITY_QCIF)) {
+            supported.add(Integer.toString(CamcorderProfile.QUALITY_QCIF));
         }
         return supported;
     }
