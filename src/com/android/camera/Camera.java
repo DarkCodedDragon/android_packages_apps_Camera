@@ -53,7 +53,6 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.MessageQueue;
 import android.os.SystemClock;
-import android.os.SystemProperties;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.util.AttributeSet;
@@ -116,7 +115,8 @@ public class Camera extends ActivityBase implements FocusManager.Listener,
             CameraSettings.KEY_PICTURE_SIZE,
             CameraSettings.KEY_JPEG_QUALITY,
             CameraSettings.KEY_PICTURE_FORMAT,
-            CameraSettings.KEY_COLOR_EFFECT
+            CameraSettings.KEY_COLOR_EFFECT,
+            CameraSettings.KEY_FORCE_PREVIEW
          };
     private static final String[] OTHER_SETTING_KEYS_1 = {
             CameraSettings.KEY_FOCUS_MODE,
@@ -165,8 +165,6 @@ public class Camera extends ActivityBase implements FocusManager.Listener,
     private static final int FACE_DETECTION_OFF = 0;
     private static final int FACE_DETECTION_ON = 1;
     public static int mFaceDetect = FACE_DETECTION_OFF;
-
-    static final String PREVIEW_PROPERTY = "ro.camera.preview";
 
 
     // When setCameraParametersWhenIdle() is called, we accumulate the subsets
@@ -2140,8 +2138,7 @@ public class Camera extends ActivityBase implements FocusManager.Listener,
                 // Set preview display if the surface is being created and preview
                 // was already started. That means preview display was set to null
                 // and we need to set it now.
-                boolean mPreviewOverride = SystemProperties.get(PREVIEW_PROPERTY).equalsIgnoreCase("true");
-                if (mPreviewOverride) {
+                if (forcePreview(mPreferences)) {
                     startPreview();
                 } else {
                     setPreviewDisplay(holder);

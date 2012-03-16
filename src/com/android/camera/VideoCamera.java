@@ -52,7 +52,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.ParcelFileDescriptor;
 import android.os.SystemClock;
-import android.os.SystemProperties;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Video;
 import android.util.Log;
@@ -106,7 +105,8 @@ public class VideoCamera extends ActivityBase
                     CameraSettings.KEY_AUDIO_ENCODER,
                     CameraSettings.KEY_VIDEO_DURATION,
                     CameraSettings.KEY_COLOR_EFFECT,
-                    CameraSettings.KEY_VIDEO_HIGH_FRAME_RATE
+                    CameraSettings.KEY_VIDEO_HIGH_FRAME_RATE,
+                    CameraSettings.KEY_FORCE_PREVIEW
         };
     public HashMap otherSettingKeys = new HashMap(2);
 
@@ -124,8 +124,6 @@ public class VideoCamera extends ActivityBase
 
     private static final boolean SWITCH_CAMERA = true;
     private static final boolean SWITCH_VIDEO = false;
-
-    static final String PREVIEW_PROPERTY = "ro.camera.preview";
 
     private static final long SHUTTER_BUTTON_TIMEOUT = 500L; // 500ms
 
@@ -622,7 +620,8 @@ public class VideoCamera extends ActivityBase
                     CameraSettings.KEY_VIDEO_QUALITY};
         final String[] OTHER_SETTING_KEYS = {
                     CameraSettings.KEY_RECORD_LOCATION,
-                    CameraSettings.KEY_POWER_SHUTTER};
+                    CameraSettings.KEY_POWER_SHUTTER,
+                    CameraSettings.KEY_FORCE_PREVIEW};
 
         CameraPicker.setImageResourceId(R.drawable.ic_switch_video_facing_holo_light);
         otherSettingKeys.put(0,OTHER_SETTING_KEYS);
@@ -1297,8 +1296,7 @@ public class VideoCamera extends ActivityBase
         // display rotation in onCreate may not be what we want.
         if (mPreviewing && (Util.getDisplayRotation(this) == mDisplayRotation)
                 && holder.isCreating()) {
-            boolean mPreviewOverride = SystemProperties.get(PREVIEW_PROPERTY).equalsIgnoreCase("true");
-            if (mPreviewOverride) {
+            if (forcePreview(mPreferences)) {
                 startPreview();
             } else {
                 setPreviewDisplay(holder);

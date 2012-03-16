@@ -104,16 +104,16 @@
     <string name="pref_camera_recordlocation_entry_off">Off</string>
     <string name="pref_camera_recordlocation_entry_on">On</string>
 
+    <!-- The default quality value is the highest available resolution (1). -->
+    <string name="pref_video_quality_default" translatable="false">1</string>
     <!-- The Video quality settings in preference [CHAR LIMIT=21] -->
     <string name="pref_video_quality_title">Video quality</string>
-    <!-- The default quality value is 5 (720p) -->
-    <string name="pref_video_quality_default" translatable="false">3</string>
     <!-- Video quality setting entry. Videos will be recorded in 1080p quality. [CHAR LIMIT=24] -->
     <string name="pref_video_quality_entry_1080p" translatable="false">1080P</string>
     <!-- Video quality setting entry. Videos will be recorded in 720p quality. [CHAR LIMIT=24] -->
     <string name="pref_video_quality_entry_720p" translatable="false">720P</string>
     <!-- Video quality setting entry. Videos will be recorded in 480p quality. [CHAR LIMIT=24] -->
-    <string name="pref_video_quality_entry_480p" translatable="false">D1</string>
+    <string name="pref_video_quality_entry_480p" translatable="false">480P</string>
     <!-- Video quality setting entry. Videos will be recorded in FWVGA quality. [CHAR LIMIT=24] -->
     <string name="pref_video_quality_entry_fwvga" translatable="false">FWVGA</string>
     <!-- Video quality setting entry. Videos will be recorded in WVGA quality. [CHAR LIMIT=24] -->
@@ -151,6 +151,10 @@
     <!-- More Settings screen, power button title -->
     <string name="pref_camera_power_shutter_title">Power shutter</string>
     <string name="pref_camera_power_shutter_default">off</string>
+
+    <!-- More Settings screen, force preview title -->
+    <string name="pref_camera_force_preview_title">Force preview</string>
+    <string name="pref_camera_force_preview_default">off</string>
 
     <!-- Settings screen, Picture size title -->
     <string name="pref_camera_picturesize_title">Picture size</string>

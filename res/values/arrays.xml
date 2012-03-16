@@ -31,16 +31,15 @@
     </string-array>
 
     <string-array name="pref_video_quality_entryvalues" translatable="false">
-        <item>2</item>
-        <item>4</item>
-        <item>5</item>
         <item>6</item>
+        <item>5</item>
+        <item>4</item>
         <item>7</item>
-        <item>@string/pref_video_quality_default</item>
         <item>8</item>
         <item>9</item>
         <item>10</item>
         <item>11</item>
+        <item>2</item>
         </string-array>
 
     <array name="video_quality_largeicons" translatable="false">
@@ -105,17 +104,10 @@
         <item>@string/pref_camera_picturesize_entry_3264x1968</item>
         <item>@string/pref_camera_picturesize_entry_3264x1952</item>
         <item>@string/pref_camera_picturesize_entry_2592x1936</item>
-        <item>@string/pref_camera_picturesize_entry_2592x1936</item>
-        <item>@string/pref_camera_picturesize_entry_2592x1936</item>
-        <item>@string/pref_camera_picturesize_entry_2592x1936</item>
-        <item>@string/pref_camera_picturesize_entry_2592x1552</item>
-        <item>@string/pref_camera_picturesize_entry_2592x1552</item>
-        <item>@string/pref_camera_picturesize_entry_2592x1552</item>
         <item>@string/pref_camera_picturesize_entry_2592x1552</item>
         <item>@string/pref_camera_picturesize_entry_2560x1712</item>
         <item>@string/pref_camera_picturesize_entry_2304x1728</item>
         <item>@string/pref_camera_picturesize_entry_2048x1536</item>
-        <item>@string/pref_camera_picturesize_entry_2048x1216</item>
         <item>@string/pref_camera_picturesize_entry_2048x1216</item>
         <item>@string/pref_camera_picturesize_entry_1920x1080</item>
         <item>@string/pref_camera_picturesize_entry_1600x1200</item>
@@ -140,19 +132,12 @@
         <item>3264x2448</item>
         <item>3264x1968</item>
         <item>3264x1952</item>
-        <item>2592x1944</item>
         <item>2592x1936</item>
-        <item>2560x1920</item>
-        <item>2592x1952</item>
         <item>2592x1552</item>
-        <item>2592x1458</item>
-        <item>2592x1456</item>
-        <item>2560x1536</item>
         <item>2560x1712</item>
         <item>2304x1728</item>
         <item>2048x1536</item>
         <item>2048x1216</item>
-        <item>2048x1232</item>
         <item>1920x1080</item>
         <item>1600x1200</item>
         <item>1600x960</item>
